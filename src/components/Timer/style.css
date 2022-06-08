@@ -1,0 +1,71 @@
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 15rem;
+  height: 15rem;
+
+  padding: 4rem;
+    
+  /* Border */
+    border: 8px solid transparent;
+    border-radius: 50%;
+    background: 
+      linear-gradient(to right, var(--black-dark), var(--black-dark)), 
+      linear-gradient(to bottom, var(--gray), var(--background-circle)); 
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    
+  animation: opacity 5s;
+}
+
+.active {
+  --background-circle: var(--green);
+}
+
+.paused {
+  --background-circle: var(--red);
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.timer {
+  color: var(--gray);
+  font-size: 4rem;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 1rem;
+}
+
+.timer span {
+  color: var(--green);
+}
+
+button {
+  margin-top: 1rem;
+
+  cursor: pointer;
+  width: 4rem;
+  height: 4rem;
+  border: none;
+  border-radius: 50%;
+  color: var(--green);
+  background-color: var(--gray);
+
+}
+
+button:hover {
+  filter: brightness(0.8);
+}

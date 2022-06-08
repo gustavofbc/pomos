@@ -1,0 +1,37 @@
+/* Fonts */
+@font-face {
+  src: url("../src/fonts/Audiowide-Regular.ttf");
+  font-family: "Audiowide-Regular";
+  font-weight: normal;
+}
+
+/* cores */
+:root {
+  --red: #EB5757;
+  --green: #44EE69;
+  --black-dark: #000;
+  --gray: #223;
+  --background-circle: #223;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Audiowide-Regular", monospace;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  background-color: var(--black-dark);
+}
+
+.logo {
+  animation: opacity 2s;
+}
