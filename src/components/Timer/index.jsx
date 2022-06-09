@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Play from '../../assets/play.svg';
 import Pause from '../../assets/pause.svg';
+
+import soundAlert from '../../assets/alert.mp3';
+
 import './style.css';
 
 const Timer = () => {
@@ -21,9 +24,7 @@ const Timer = () => {
             setMinutes(minutes - 1);
           } else {
             // alerta a conclusão de um pomodoro
-            setTimeout(() => {
-              alert('Pomodoro concluído!');
-            }, 100);
+            alertSound();
 
             // retorna aos valores iniciais
             setIsActive(false);
@@ -65,9 +66,17 @@ const Timer = () => {
     document.querySelector('.circle').classList.toggle('paused');
   }
 
+  function alertSound() {
+    document.getElementById('audio').play();
+    setTimeout(() => {
+      alert('Pomodoro concluído!');
+    }, 100);
+  }
+
   return (
     <section className="circle">
       <div className="timer">
+        <audio src={soundAlert} id="audio"></audio>
         {timerMinutes}
         <span>:</span>
         {timerSeconds}
