@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Play from '../../assets/play1.svg';
-import Pause from '../../assets/pause1.svg';
+import Play from '../../assets/play.svg';
+import Pause from '../../assets/pause.svg';
 
 import soundAlert from '../../assets/alert.mp3';
 
@@ -28,11 +28,7 @@ const Timer = () => {
             alertSound();
 
             // retorna aos valores iniciais
-            setIsActive(false);
-            setIsPaused(true);
-            setMinutes(25);
-            setSeconds(0);
-            toggleColorInitial();
+            initCicle('Pomodoro', 'pomodoro-active', 'red', 25, 0);
           }
         } else {
           setSeconds(seconds - 1);
@@ -41,10 +37,6 @@ const Timer = () => {
       clearInterval(interval);
     }, 1000);
   }, [isActive, isPaused, seconds]);
-
-  function toggleColorInitial() {
-    document.querySelector('.circle').classList.remove('active', 'paused');
-  }
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
@@ -95,37 +87,6 @@ const Timer = () => {
     setSeconds(seconds);
   }
 
-  // function handleStartPomodoro() {
-  //   clearInterval(interval);
-  //   document.getElementById('cicle').innerText = 'Pomodoro';
-  //   document.getElementById('cicle').style = 'color: var(--red)';
-  //   toggleColor('pomodoro-active');
-  //   setIsActive(false);
-  //   setIsPaused(true);
-  //   setMinutes(25);
-  //   setSeconds(0);
-  // }
-
-  // function handleStartShortBreak() {
-  //   clearInterval(interval);
-  //   document.getElementById('cicle').innerText = 'Short Break';
-  //   document.getElementById('cicle').style = 'color: var(--blue)';
-  //   toggleColor('short-break-active');
-  //   setIsActive(false);
-  //   setIsPaused(true);
-  //   setMinutes(5);
-  //   setSeconds(0);
-  // }
-
-  // function handleStartLongBreak() {
-  //   clearInterval(interval);
-  //   document.getElementById('cicle').innerText = 'Long Break';
-  //   document.getElementById('cicle').style = 'color: var(--purpure)';
-  //   toggleColor('long-break-active');
-  //   setMinutes(15);
-  //   setSeconds(0);
-  // }
-
   return (
     <section>
       <div className="container-controls">
@@ -164,7 +125,6 @@ const Timer = () => {
         {!isActive && (
           <button className="button-action" onClick={handleStart}>
             Iniciar
-            {/* <img src={Play} alt="iniciar" /> */}
           </button>
         )}
         {isPaused === false && (
