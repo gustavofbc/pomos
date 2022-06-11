@@ -72,24 +72,6 @@ const Timer = () => {
     document.getElementById('circle').setAttribute('class', classe);
   }
 
-  // function toggleColorPomodoro() {
-  //   document.querySelector('.circle').classList.add('pomodoro-active');
-  //   document.querySelector('.circle').classList.remove('short-break-active');
-  //   document.querySelector('.circle').classList.remove('long-break-active');
-  // }
-
-  // function toggleColorShortBreak() {
-  //   document.querySelector('.circle').classList.remove('pomodoro-active');
-  //   document.querySelector('.circle').classList.add('short-break-active');
-  //   document.querySelector('.circle').classList.remove('long-break-active');
-  // }
-
-  // function toggleColorLongBreak() {
-  //   document.querySelector('.circle').classList.remove('pomodoro-active');
-  //   document.querySelector('.circle').classList.remove('short-break-active');
-  //   document.querySelector('.circle').classList.add('long-break-active');
-  // }
-
   function alertSound() {
     document.getElementById('audio').play();
     setTimeout(() => {
@@ -97,54 +79,74 @@ const Timer = () => {
     }, 100);
   }
 
-  function handleStartPomodoro() {
+  function initCicle(textCicle, classCicleActive, color, minutes, seconds) {
     clearInterval(interval);
-    document.getElementById('cicle').innerText = 'Pomodoro';
-    document.getElementById('cicle').style = 'color: var(--red)';
-    toggleColor('pomodoro-active');
+
+    const elemento = document.getElementById('cicle');
+    if (elemento) {
+      elemento.innerText = textCicle;
+      elemento.style = `color: var(--${color})`;
+    }
+
+    toggleColor(classCicleActive);
     setIsActive(false);
     setIsPaused(true);
-    setMinutes(25);
-    setSeconds(0);
+    setMinutes(minutes);
+    setSeconds(seconds);
   }
 
-  function handleStartShortBreak() {
-    clearInterval(interval);
-    document.getElementById('cicle').innerText = 'Short Break';
-    document.getElementById('cicle').style = 'color: var(--blue)';
-    toggleColor('short-break-active');
-    setIsActive(false);
-    setIsPaused(true);
-    setMinutes(5);
-    setSeconds(0);
-  }
+  // function handleStartPomodoro() {
+  //   clearInterval(interval);
+  //   document.getElementById('cicle').innerText = 'Pomodoro';
+  //   document.getElementById('cicle').style = 'color: var(--red)';
+  //   toggleColor('pomodoro-active');
+  //   setIsActive(false);
+  //   setIsPaused(true);
+  //   setMinutes(25);
+  //   setSeconds(0);
+  // }
 
-  function handleStartLongBreak() {
-    clearInterval(interval);
-    document.getElementById('cicle').innerText = 'Long Break';
-    document.getElementById('cicle').style = 'color: var(--purpure)';
-    toggleColor('long-break-active');
-    setMinutes(15);
-    setSeconds(0);
-  }
+  // function handleStartShortBreak() {
+  //   clearInterval(interval);
+  //   document.getElementById('cicle').innerText = 'Short Break';
+  //   document.getElementById('cicle').style = 'color: var(--blue)';
+  //   toggleColor('short-break-active');
+  //   setIsActive(false);
+  //   setIsPaused(true);
+  //   setMinutes(5);
+  //   setSeconds(0);
+  // }
+
+  // function handleStartLongBreak() {
+  //   clearInterval(interval);
+  //   document.getElementById('cicle').innerText = 'Long Break';
+  //   document.getElementById('cicle').style = 'color: var(--purpure)';
+  //   toggleColor('long-break-active');
+  //   setMinutes(15);
+  //   setSeconds(0);
+  // }
 
   return (
     <section>
       <div className="container-controls">
         <button
-          onClick={handleStartPomodoro}
+          onClick={() => initCicle('Pomodoro', 'pomodoro-active', 'red', 25, 0)}
           className="function pomodoro-button"
         >
           Pomodoro
         </button>
         <button
-          onClick={handleStartShortBreak}
+          onClick={() =>
+            initCicle('Short break', 'short-break-active', 'blue', 5, 0)
+          }
           className="function short-break-button"
         >
           Short break
         </button>
         <button
-          onClick={handleStartLongBreak}
+          onClick={() =>
+            initCicle('Long break', 'long-break-active', 'purpure', 15, 0)
+          }
           className="function long-break-button"
         >
           Long break
