@@ -3,9 +3,46 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
-  width: 15rem;
-  height: 15rem;
+.container-controls {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0rem;
+}
+
+.function {
+  width: 8rem;
+  height: 3em;
+  margin: 0rem 0.5em;
+  background-color: var(--background-circle);
+  border-radius: 0.4rem;
+}
+
+.pomodoro-button {
+  color: var(--red);
+  border: 2px solid var(--red);
+}
+
+.short-break-button {
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+
+.long-break-button {
+  color: var(--purpure);
+  border: 2px solid var(--purpure);
+}
+
+
+.circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 20rem;
+  height: 20rem;
 
   padding: 4rem;
     
@@ -29,6 +66,19 @@ section {
   --background-circle: var(--red);
 }
 
+
+.pomodoro-active {
+  --background-circle: var(--red);
+}
+
+.short-break-active {
+  --background-circle: var(--blue);
+}
+
+.long-break-active {
+  --background-circle: var(--purpure);
+}
+
 @keyframes opacity {
   from {
     opacity: 0;
@@ -50,16 +100,14 @@ section {
 }
 
 .timer span {
-  color: var(--green);
+  color: var(--background-circle);
 }
 
-button {
+.button-action {
   margin-top: 1rem;
 
-  cursor: pointer;
   width: 4rem;
   height: 4rem;
-  border: none;
   border-radius: 50%;
   color: var(--green);
   background-color: var(--gray);
@@ -68,4 +116,8 @@ button {
 
 button:hover {
   filter: brightness(0.8);
+}
+
+.cicle {
+  padding: 1rem 0;
 }
