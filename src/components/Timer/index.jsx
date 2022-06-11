@@ -9,7 +9,6 @@ import './style.css';
 const Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(5);
-  // const [message, setMessage] = useState(false);
 
   const [isPaused, setIsPaused] = useState(true);
   const [isActive, setIsActive] = useState(false);
@@ -53,43 +52,43 @@ const Timer = () => {
   function handleStart() {
     setIsActive(true);
     setIsPaused(false);
-    toggleColorStart();
-  }
-
-  function toggleColorStart() {
-    document.querySelector('.circle').classList.toggle('active');
-    document.querySelector('.circle').classList.remove('pomodoro-active');
-    document.querySelector('.circle').classList.remove('short-break-active');
-    document.querySelector('.circle').classList.remove('long-break-active');
+    toggleColor('active');
   }
 
   function handlePause() {
     clearInterval(interval);
     setIsPaused(!isPaused);
-    toggleColorPause();
+    toggleColor('paused');
   }
 
-  function toggleColorPause() {
-    document.querySelector('.circle').classList.toggle('paused');
+  function handleResume() {
+    clearInterval(interval);
+    setIsPaused(!isPaused);
+    toggleColor('active');
   }
 
-  function toggleColorPomodoro() {
-    document.querySelector('.circle').classList.add('pomodoro-active');
-    document.querySelector('.circle').classList.remove('short-break-active');
-    document.querySelector('.circle').classList.remove('long-break-active');
+  function toggleColor(classe) {
+    document.getElementById('circle').removeAttribute('class');
+    document.getElementById('circle').setAttribute('class', classe);
   }
 
-  function toggleColorShortBreak() {
-    document.querySelector('.circle').classList.remove('pomodoro-active');
-    document.querySelector('.circle').classList.add('short-break-active');
-    document.querySelector('.circle').classList.remove('long-break-active');
-  }
+  // function toggleColorPomodoro() {
+  //   document.querySelector('.circle').classList.add('pomodoro-active');
+  //   document.querySelector('.circle').classList.remove('short-break-active');
+  //   document.querySelector('.circle').classList.remove('long-break-active');
+  // }
 
-  function toggleColorLongBreak() {
-    document.querySelector('.circle').classList.remove('pomodoro-active');
-    document.querySelector('.circle').classList.remove('short-break-active');
-    document.querySelector('.circle').classList.add('long-break-active');
-  }
+  // function toggleColorShortBreak() {
+  //   document.querySelector('.circle').classList.remove('pomodoro-active');
+  //   document.querySelector('.circle').classList.add('short-break-active');
+  //   document.querySelector('.circle').classList.remove('long-break-active');
+  // }
+
+  // function toggleColorLongBreak() {
+  //   document.querySelector('.circle').classList.remove('pomodoro-active');
+  //   document.querySelector('.circle').classList.remove('short-break-active');
+  //   document.querySelector('.circle').classList.add('long-break-active');
+  // }
 
   function alertSound() {
     document.getElementById('audio').play();
@@ -102,7 +101,7 @@ const Timer = () => {
     clearInterval(interval);
     document.getElementById('cicle').innerText = 'Pomodoro';
     document.getElementById('cicle').style = 'color: var(--red)';
-    toggleColorPomodoro();
+    toggleColor('pomodoro-active');
     setIsActive(false);
     setIsPaused(true);
     setMinutes(25);
@@ -113,7 +112,7 @@ const Timer = () => {
     clearInterval(interval);
     document.getElementById('cicle').innerText = 'Short Break';
     document.getElementById('cicle').style = 'color: var(--blue)';
-    toggleColorShortBreak();
+    toggleColor('short-break-active');
     setIsActive(false);
     setIsPaused(true);
     setMinutes(5);
@@ -124,7 +123,7 @@ const Timer = () => {
     clearInterval(interval);
     document.getElementById('cicle').innerText = 'Long Break';
     document.getElementById('cicle').style = 'color: var(--purpure)';
-    toggleColorLongBreak();
+    toggleColor('long-break-active');
     setMinutes(15);
     setSeconds(0);
   }
@@ -152,7 +151,7 @@ const Timer = () => {
         </button>
       </div>
 
-      <div className="circle">
+      <div className="circle" id="circle">
         <div className="timer">
           <audio src={soundAlert} id="audio"></audio>
           {timerMinutes}
@@ -173,7 +172,7 @@ const Timer = () => {
         )}
 
         {isPaused === true && isActive === true ? (
-          <button className="button-action" onClick={handlePause}>
+          <button className="button-action" onClick={handleResume}>
             <img src={Play} alt="retomar" />
           </button>
         ) : (
