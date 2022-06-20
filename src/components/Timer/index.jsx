@@ -7,14 +7,40 @@ import soundAlert from '../../assets/alert.mp3';
 import './style.css';
 
 const Timer = () => {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
 
   const [isPaused, setIsPaused] = useState(true);
   const [isActive, setIsActive] = useState(false);
 
+  const [counterPomodoros, setCounterPomodoros] = useState(0);
+
   let interval;
 
+  function incrementCounter(value) {
+    setCounterPomodoros(value);
+  }
+
+  // let elemento = document.getElementById('circle');
+  function verifyCicle() {
+    if (
+      document.getElementById('circle').classList.contains('short-break-active')
+    ) {
+      return console.log('ta em short break');
+    }
+    if (
+      document.getElementById('circle').classList.contains('pomodoro-active')
+    ) {
+      return console.log('ta em pomodoro');
+    }
+    if (
+      document.getElementById('circle').classList.contains('long-break-active')
+    ) {
+      return console.log('ta em long break');
+    }
+  }
+
+  let counter = 0;
   useEffect(() => {
     interval = setInterval(() => {
       if (isActive && isPaused === false) {
@@ -24,11 +50,37 @@ const Timer = () => {
             setSeconds(59);
             setMinutes(minutes - 1);
           } else {
-            // alerta a conclusão de um pomodoro
-            alertSound();
+            console.log(counterPomodoros);
+            if (counterPomodoros === 3) {
+              initCicle('Long break', 'long-break-active', 'purpure', 0, 1);
+              // alerta a conclusão de um pomodoro
+              alertSound(counter);
+              setCounterPomodoros(0);
+            } else if (counterPomodoros < 3) {
+              //contador de ciclos de pomodoro
+              counter = counterPomodoros + 1;
+              incrementCounter(counter);
 
-            // retorna aos valores iniciais
-            initCicle('Pomodoro', 'pomodoro-active', 'red', 25, 0);
+              initCicle('Short break', 'short-break-active', 'blue', 0, 1);
+              verifyCicle();
+
+              // if (elemento.classList.contains('short-break-active') === true) {
+              //   console.log('ta em short break');
+              // }
+
+              // alerta a conclusão de um pomodoro
+              alertSound(counter);
+            } else {
+              //contador de ciclos de pomodoro
+              counter = counterPomodoros + 1;
+              incrementCounter(counter);
+
+              // alerta a conclusão de um pomodoro
+              alertSound(counter);
+
+              // retorna aos valores iniciais
+              initCicle('Pomodoro', 'pomodoro-active', 'red', 0, 2);
+            }
           }
         } else {
           setSeconds(seconds - 1);
@@ -36,7 +88,7 @@ const Timer = () => {
       }
       clearInterval(interval);
     }, 1000);
-  }, [isActive, isPaused, seconds]);
+  }, [isActive, isPaused, seconds, counterPomodoros]);
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
@@ -64,7 +116,8 @@ const Timer = () => {
     document.getElementById('circle').setAttribute('class', classe);
   }
 
-  function alertSound() {
+  function alertSound(counter) {
+    setCounterPomodoros(counter++);
     document.getElementById('audio').play();
     setTimeout(() => {
       alert('Ciclo concluído!');
@@ -85,6 +138,20 @@ const Timer = () => {
     setIsPaused(true);
     setMinutes(minutes);
     setSeconds(seconds);
+    setCounterPomodoros(0);
+  }
+
+  function initPomos() {
+    const elemento = document.getElementById('cicle');
+    if (elemento) {
+      elemento.innerText = 'Pomodoro';
+      elemento.style = `color: var(--red)`;
+    }
+
+    const circleElement = document.getElementById('circle');
+    if (circleElement) {
+      circleElement.setAttribute('class', 'pomodoro-active');
+    }
   }
 
   return (
@@ -147,6 +214,7 @@ const Timer = () => {
         style={{ color: 'var(--background-circle)' }}
       >
         Bem vindo ao pomos!
+        {setTimeout(initPomos, 3000)}
       </h2>
     </section>
   );
