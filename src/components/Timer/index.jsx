@@ -14,6 +14,7 @@ const Timer = () => {
   const [isActive, setIsActive] = useState(false);
 
   const [counterPomodoros, setCounterPomodoros] = useState(0);
+  const [cicle, setCicle] = useState('pomodoro');
 
   let interval;
 
@@ -21,22 +22,35 @@ const Timer = () => {
     setCounterPomodoros(value);
   }
 
-  // let elemento = document.getElementById('circle');
-  function verifyCicle() {
-    if (
-      document.getElementById('circle').classList.contains('short-break-active')
-    ) {
-      return console.log('ta em short break');
+  function verifyCicle(cicle) {
+    //   if (
+    //     document.getElementById('circle').classList.contains('short-break-active')
+    //   ) {
+    //     initCicle('Pomodoro', 'pomodoro-active', 'red', 0, 2);
+    //     return console.log('ta em short break');
+    //   }
+    //   if (
+    //     document.getElementById('circle').classList.contains('pomodoro-active')
+    //   ) {
+    //     return console.log('ta em pomodoro');
+    //   }
+    //   if (
+    //     document.getElementById('circle').classList.contains('long-break-active')
+    //   ) {
+    //     return console.log('ta em long break');
+    //   }
+    if (cicle === 'pomodoro') {
+      initCicle(
+        'short break',
+        'Short break',
+        'short-break-active',
+        'blue',
+        0,
+        2,
+      );
     }
-    if (
-      document.getElementById('circle').classList.contains('pomodoro-active')
-    ) {
-      return console.log('ta em pomodoro');
-    }
-    if (
-      document.getElementById('circle').classList.contains('long-break-active')
-    ) {
-      return console.log('ta em long break');
+    if (cicle === 'short break' || cicle === 'long break') {
+      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2);
     }
   }
 
@@ -51,22 +65,24 @@ const Timer = () => {
             setMinutes(minutes - 1);
           } else {
             console.log(counterPomodoros);
-            if (counterPomodoros === 3) {
-              initCicle('Long break', 'long-break-active', 'purpure', 0, 1);
+            if (counterPomodoros === 6) {
+              initCicle(
+                'long break',
+                'Long break',
+                'long-break-active',
+                'purpure',
+                0,
+                1,
+              );
               // alerta a conclusão de um pomodoro
               alertSound(counter);
-              setCounterPomodoros(0);
-            } else if (counterPomodoros < 3) {
+              setCounterPomodoros(-1);
+            } else if (counterPomodoros < 6) {
               //contador de ciclos de pomodoro
               counter = counterPomodoros + 1;
               incrementCounter(counter);
 
-              initCicle('Short break', 'short-break-active', 'blue', 0, 1);
-              verifyCicle();
-
-              // if (elemento.classList.contains('short-break-active') === true) {
-              //   console.log('ta em short break');
-              // }
+              verifyCicle(cicle);
 
               // alerta a conclusão de um pomodoro
               alertSound(counter);
@@ -79,7 +95,7 @@ const Timer = () => {
               alertSound(counter);
 
               // retorna aos valores iniciais
-              initCicle('Pomodoro', 'pomodoro-active', 'red', 0, 2);
+              initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2);
             }
           }
         } else {
@@ -124,7 +140,14 @@ const Timer = () => {
     }, 100);
   }
 
-  function initCicle(textCicle, classCicleActive, color, minutes, seconds) {
+  function initCicle(
+    cicle,
+    textCicle,
+    classCicleActive,
+    color,
+    minutes,
+    seconds,
+  ) {
     clearInterval(interval);
 
     const elemento = document.getElementById('cicle');
@@ -133,6 +156,7 @@ const Timer = () => {
       elemento.style = `color: var(--${color})`;
     }
 
+    setCicle(cicle);
     toggleColor(classCicleActive);
     setIsActive(false);
     setIsPaused(true);
@@ -158,14 +182,23 @@ const Timer = () => {
     <section>
       <div className="container-controls">
         <button
-          onClick={() => initCicle('Pomodoro', 'pomodoro-active', 'red', 25, 0)}
+          onClick={() =>
+            initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2)
+          }
           className="function pomodoro-button"
         >
           Pomodoro
         </button>
         <button
           onClick={() =>
-            initCicle('Short break', 'short-break-active', 'blue', 5, 0)
+            initCicle(
+              'short break',
+              'Short break',
+              'short-break-active',
+              'blue',
+              5,
+              0,
+            )
           }
           className="function short-break-button"
         >
@@ -173,7 +206,14 @@ const Timer = () => {
         </button>
         <button
           onClick={() =>
-            initCicle('Long break', 'long-break-active', 'purpure', 15, 0)
+            initCicle(
+              'long break',
+              'Long break',
+              'long-break-active',
+              'purpure',
+              15,
+              0,
+            )
           }
           className="function long-break-button"
         >
@@ -214,8 +254,8 @@ const Timer = () => {
         style={{ color: 'var(--background-circle)' }}
       >
         Bem vindo ao pomos!
-        {setTimeout(initPomos, 3000)}
       </h2>
+      {/* {setTimeout(initPomos, 3000)} */}
     </section>
   );
 };
