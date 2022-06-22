@@ -7,8 +7,8 @@ import soundAlert from '../../assets/alert.mp3';
 import './style.css';
 
 const Timer = () => {
-  const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(1);
 
   const [isPaused, setIsPaused] = useState(true);
   const [isActive, setIsActive] = useState(false);
@@ -17,28 +17,14 @@ const Timer = () => {
   const [cicle, setCicle] = useState('pomodoro');
 
   let interval;
+  let counter = 0;
+  let init = false;
 
   function incrementCounter(value) {
     setCounterPomodoros(value);
   }
 
   function verifyCicle(cicle) {
-    //   if (
-    //     document.getElementById('circle').classList.contains('short-break-active')
-    //   ) {
-    //     initCicle('Pomodoro', 'pomodoro-active', 'red', 0, 2);
-    //     return console.log('ta em short break');
-    //   }
-    //   if (
-    //     document.getElementById('circle').classList.contains('pomodoro-active')
-    //   ) {
-    //     return console.log('ta em pomodoro');
-    //   }
-    //   if (
-    //     document.getElementById('circle').classList.contains('long-break-active')
-    //   ) {
-    //     return console.log('ta em long break');
-    //   }
     if (cicle === 'pomodoro') {
       initCicle(
         'short break',
@@ -54,7 +40,6 @@ const Timer = () => {
     }
   }
 
-  let counter = 0;
   useEffect(() => {
     interval = setInterval(() => {
       if (isActive && isPaused === false) {
@@ -64,7 +49,7 @@ const Timer = () => {
             setSeconds(59);
             setMinutes(minutes - 1);
           } else {
-            console.log(counterPomodoros);
+            //após completar os 3 pomodoros completos
             if (counterPomodoros === 6) {
               initCicle(
                 'long break',
@@ -166,15 +151,10 @@ const Timer = () => {
   }
 
   function initPomos() {
-    const elemento = document.getElementById('cicle');
+    init = true;
+    const elemento = document.querySelector('.circle');
     if (elemento) {
-      elemento.innerText = 'Pomodoro';
-      elemento.style = `color: var(--red)`;
-    }
-
-    const circleElement = document.getElementById('circle');
-    if (circleElement) {
-      circleElement.setAttribute('class', 'pomodoro-active');
+      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2);
     }
   }
 
@@ -255,7 +235,7 @@ const Timer = () => {
       >
         Bem vindo ao pomos!
       </h2>
-      {/* {setTimeout(initPomos, 3000)} */}
+      {init === false ? setTimeout(initPomos, 3000) : ''}
     </section>
   );
 };
