@@ -7,8 +7,8 @@ import soundAlert from '../../assets/alert.mp3';
 import './style.css';
 
 const Timer = () => {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(1);
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
 
   const [isPaused, setIsPaused] = useState(true);
   const [isActive, setIsActive] = useState(false);
@@ -31,12 +31,12 @@ const Timer = () => {
         'Short break',
         'short-break-active',
         'blue',
+        5,
         0,
-        2,
       );
     }
     if (cicle === 'short break' || cicle === 'long break') {
-      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2);
+      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0);
     }
   }
 
@@ -56,8 +56,8 @@ const Timer = () => {
                 'Long break',
                 'long-break-active',
                 'purpure',
+                15,
                 0,
-                1,
               );
               // alerta a conclusão de um pomodoro
               alertSound(counter);
@@ -80,7 +80,14 @@ const Timer = () => {
               alertSound(counter);
 
               // retorna aos valores iniciais
-              initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2);
+              initCicle(
+                'pomodoro',
+                'Pomodoro',
+                'pomodoro-active',
+                'red',
+                25,
+                0,
+              );
             }
           }
         } else {
@@ -154,7 +161,7 @@ const Timer = () => {
     init = true;
     const elemento = document.querySelector('.circle');
     if (elemento) {
-      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2);
+      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0);
     }
   }
 
@@ -163,7 +170,7 @@ const Timer = () => {
       <div className="container-controls">
         <button
           onClick={() =>
-            initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 0, 2)
+            initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0)
           }
           className="function pomodoro-button"
         >
