@@ -9,6 +9,7 @@ section {
   display: flex;
   justify-content: center;
   padding: 1rem 0rem;
+  margin-bottom: 1rem;
 }
 
 .function {
@@ -34,15 +35,21 @@ section {
   border: 2px solid var(--purpure);
 }
 
-
-#circle {
+.timer-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
-  width: 20rem;
-  height: 20rem;
+
+#circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 19rem;
+  height: 19rem;
 
   padding: 4rem;
     
@@ -104,7 +111,7 @@ section {
 }
 
 .button-action {
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 
   width: 4rem;
   height: 4rem;
@@ -124,6 +131,10 @@ button:hover {
 }
 
 @media screen and (max-width: 450px) {
+  section {
+    flex-direction: column-reverse;
+  }
+  
   .container-controls {
     display: flex;
     flex-direction: column;

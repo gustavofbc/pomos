@@ -209,40 +209,44 @@ const Timer = () => {
           Long break
         </button>
       </div>
-      <div className="circle" id="circle">
-        <div className="timer">
-          <audio src={soundAlert} id="audio"></audio>
-          {timerMinutes}
-          <span>:</span>
-          {timerSeconds}
+
+      <div className="timer-container">
+        <div className="circle" id="circle">
+          <div className="timer">
+            <audio src={soundAlert} id="audio"></audio>
+            {timerMinutes}
+            <span>:</span>
+            {timerSeconds}
+          </div>
+
+          {!isActive && (
+            <button className="button-action" onClick={handleStart}>
+              Iniciar
+            </button>
+          )}
+          {isPaused === false && (
+            <button className="button-action" onClick={handlePause}>
+              <img src={Pause} alt="pausar" />
+            </button>
+          )}
+
+          {isPaused === true && isActive === true ? (
+            <button className="button-action" onClick={handleResume}>
+              <img src={Play} alt="retomar" />
+            </button>
+          ) : (
+            ''
+          )}
         </div>
 
-        {!isActive && (
-          <button className="button-action" onClick={handleStart}>
-            Iniciar
-          </button>
-        )}
-        {isPaused === false && (
-          <button className="button-action" onClick={handlePause}>
-            <img src={Pause} alt="pausar" />
-          </button>
-        )}
-
-        {isPaused === true && isActive === true ? (
-          <button className="button-action" onClick={handleResume}>
-            <img src={Play} alt="retomar" />
-          </button>
-        ) : (
-          ''
-        )}
+        <h2
+          id="cicle"
+          className="cicle"
+          style={{ color: 'var(--background-circle)' }}
+        >
+          Bem vindo ao pomos!
+        </h2>
       </div>
-      <h2
-        id="cicle"
-        className="cicle"
-        style={{ color: 'var(--background-circle)' }}
-      >
-        Bem vindo ao pomos!
-      </h2>
     </section>
   );
 };
