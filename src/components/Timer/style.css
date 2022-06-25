@@ -13,7 +13,7 @@ section {
 
 .function {
   width: 8rem;
-  height: 3em;
+  height: 2.6rem;
   margin: 0rem 0.5em;
   background-color: var(--background-circle);
   border-radius: 0.4rem;
@@ -121,4 +121,19 @@ button:hover {
 
 .cicle {
   padding: 1rem 0;
+}
+
+@media screen and (max-width: 450px) {
+  .container-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .function {
+    margin: 0.5rem;
+    background-color: var(--background-circle);
+    border-radius: 0.4rem;
+  }
 }

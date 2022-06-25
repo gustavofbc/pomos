@@ -18,7 +18,6 @@ const Timer = () => {
 
   let interval;
   let counter = 0;
-  let init = false;
 
   function incrementCounter(value) {
     setCounterPomodoros(value);
@@ -41,6 +40,8 @@ const Timer = () => {
   }
 
   useEffect(() => {
+    initPomos();
+
     interval = setInterval(() => {
       if (isActive && isPaused === false) {
         clearInterval(interval);
@@ -158,11 +159,12 @@ const Timer = () => {
   }
 
   function initPomos() {
-    init = true;
-    const elemento = document.querySelector('.circle');
-    if (elemento) {
-      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0);
-    }
+    setTimeout(() => {
+      const elemento = document.querySelector('.circle');
+      if (elemento) {
+        initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0);
+      }
+    }, 3000);
   }
 
   return (
@@ -207,7 +209,6 @@ const Timer = () => {
           Long break
         </button>
       </div>
-
       <div className="circle" id="circle">
         <div className="timer">
           <audio src={soundAlert} id="audio"></audio>
@@ -242,7 +243,6 @@ const Timer = () => {
       >
         Bem vindo ao pomos!
       </h2>
-      {init === false ? setTimeout(initPomos, 3000) : ''}
     </section>
   );
 };
