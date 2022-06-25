@@ -16,9 +16,14 @@ const Timer = () => {
   const [counterPomodoros, setCounterPomodoros] = useState(0);
   const [cicle, setCicle] = useState('pomodoro');
 
+  // Não é uma boa ideia criar variáveis aqui, isso quebra o princício da imutabilidade do React;
+  // Ou essas variáveis se tornam estados: [state, setState] = useState() ou tu move ela para algum escopo;
   let interval;
   let counter = 0;
 
+  // Pela função ser incremental, acho que ela não precisa receber um valor, ela pode incrementar baseado no 
+  // valor atual do counter;
+  // ex: function incrementCounter() { setCounterPomodoros(counterPomodoros + 1); }
   function incrementCounter(value) {
     setCounterPomodoros(value);
   }
@@ -34,7 +39,11 @@ const Timer = () => {
         0,
       );
     }
+    // Teoricamente essa verificação nem precisa ser feita, já que caso não seja 'pomodoro', ele vai para as outas opções
+    // basicamente um else.
     if (cicle === 'short break' || cicle === 'long break') {
+      // baseado na sugestão que eu dei ali em baixo, tu chamaria essa função assim:
+      // initCicle({ type: 'pomodoro', minutes: 25, seconds: 0 });
       initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0);
     }
   }
@@ -45,6 +54,7 @@ const Timer = () => {
     interval = setInterval(() => {
       if (isActive && isPaused === false) {
         clearInterval(interval);
+
         if (seconds === 0) {
           if (minutes !== 0) {
             setSeconds(59);
@@ -62,6 +72,7 @@ const Timer = () => {
               );
               // alerta a conclusão de um pomodoro
               alertSound(counter);
+              // O contador é pra virar -1 mesmo?
               setCounterPomodoros(-1);
             } else if (counterPomodoros < 6) {
               //contador de ciclos de pomodoro
@@ -99,6 +110,8 @@ const Timer = () => {
     }, 1000);
   }, [isActive, isPaused, seconds, counterPomodoros]);
 
+  // Existe uma função da String chamada padStart, tu usa ela assim: `String(minutes).padStart(2, '0')`
+  // E ela já adiciona o '0' no incio do número caso ele possua apenas 1 dígito. 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
@@ -141,6 +154,46 @@ const Timer = () => {
     minutes,
     seconds,
   ) {
+    // Toda vez que tu executa essa função tu precisa passar muita informação, é contra indicado criar funções com mais de 2 parâmetros;
+    // Mas além disso, a maioria desses parâmetros são padrões, então não faz sentido tu ter que passar toda vez a mesma coisa.
+    // Sugestão:
+    /**
+     * function initCicle({ type, minutes, seconds }) {}
+     * 
+     * Esse type pode ser: 'pomo', 'shotBreak' e 'longBreak';
+     * Dessa forma tu já tem algumas coisas padrões para cada um desses tipos:
+     * EX: 
+     * const CICLE_TYPES = {
+     *  pomodoro: {
+     *    text: 'Pomodoro',
+     *    className: 'pomodoro-active',
+     *    color: 'red',
+     *  },
+     *  shortBreak: {
+     *    text: 'Short break',
+     *    className: 'short-break-active',
+     *    color: 'blue', 
+     *  },
+     *  longBreak: {
+     *    text: 'Long break',
+     *    className: 'long-break-active',
+     *    color: 'purple', 
+     *  }
+     * }
+     * 
+     * Ai com isso tu recebe a prop `type` e acessa esse objeto para construir o seu ciclo:
+     * const { text, className, color } = CICLE_TYPES[type]
+     * 
+     * OBS: Teoricamente os valores são em minutos e segundos são pré definidos, então até isso poderia ser abstraído:
+     * ficando algo como: 
+     * pomodoro: {
+     *    text: 'Pomodoro',
+     *    className: 'pomodoro-active',
+     *    color: 'red',
+     *    minutes: 25,
+     *    seconds: 0,
+     * }
+     */
     clearInterval(interval);
 
     const elemento = document.getElementById('cicle');
