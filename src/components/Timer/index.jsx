@@ -15,92 +15,87 @@ const Timer = () => {
 
   const [counterPomodoros, setCounterPomodoros] = useState(0);
   const [cicle, setCicle] = useState('pomodoro');
+  const [intervalTimer, setIntervalTimer] = useState(0);
 
-  let interval;
-  let counter = 0;
+  const CICLE_TYPES = {
+    pomodoro: {
+      text: 'Pomodoro',
+      className: 'pomodoro-active',
+      color: 'red',
+      minutes: 25,
+      seconds: 0,
+    },
+    shortBreak: {
+      text: 'Short break',
+      className: 'short-break-active',
+      color: 'blue',
+      minutes: 5,
+      seconds: 0,
+    },
+    longBreak: {
+      text: 'Long break',
+      className: 'long-break-active',
+      color: 'purple',
+      minutes: 15,
+      seconds: 0,
+    },
+  };
 
-  function incrementCounter(value) {
-    setCounterPomodoros(value);
+  function incrementCounter() {
+    setCounterPomodoros(counterPomodoros + 1);
   }
 
   function verifyCicle(cicle) {
     if (cicle === 'pomodoro') {
-      initCicle(
-        'short break',
-        'Short break',
-        'short-break-active',
-        'blue',
-        5,
-        0,
-      );
-    }
-    if (cicle === 'short break' || cicle === 'long break') {
-      initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0);
+      initCicle('shortBreak');
+    } else {
+      initCicle('pomodoro');
     }
   }
 
   useEffect(() => {
     initPomos();
 
-    interval = setInterval(() => {
-      if (isActive && isPaused === false) {
-        clearInterval(interval);
-        if (seconds === 0) {
-          if (minutes !== 0) {
-            setSeconds(59);
-            setMinutes(minutes - 1);
-          } else {
-            //após completar os 3 pomodoros completos
-            if (counterPomodoros === 6) {
-              initCicle(
-                'long break',
-                'Long break',
-                'long-break-active',
-                'purpure',
-                15,
-                0,
-              );
-              // alerta a conclusão de um pomodoro
-              alertSound(counter);
-              setCounterPomodoros(-1);
-            } else if (counterPomodoros < 6) {
-              //contador de ciclos de pomodoro
-              counter = counterPomodoros + 1;
-              incrementCounter(counter);
-
-              verifyCicle(cicle);
-
-              // alerta a conclusão de um pomodoro
-              alertSound(counter);
+    setIntervalTimer(
+      setInterval(() => {
+        if (isActive && isPaused === false) {
+          clearInterval(intervalTimer);
+          if (seconds === 0) {
+            if (minutes !== 0) {
+              setSeconds(59);
+              setMinutes(minutes - 1);
             } else {
-              //contador de ciclos de pomodoro
-              counter = counterPomodoros + 1;
-              incrementCounter(counter);
+              //após completar os 3 pomodoros completos
+              if (counterPomodoros === 6) {
+                initCicle('longBreak');
+                // alerta a conclusão de um pomodoro
+                alertSound();
+                setCounterPomodoros(-1);
+              } else if (counterPomodoros < 6) {
+                verifyCicle(cicle);
 
-              // alerta a conclusão de um pomodoro
-              alertSound(counter);
+                // alerta a conclusão de um pomodoro
+                alertSound();
+              } else {
+                // alerta a conclusão de um pomodoro
+                alertSound();
 
-              // retorna aos valores iniciais
-              initCicle(
-                'pomodoro',
-                'Pomodoro',
-                'pomodoro-active',
-                'red',
-                25,
-                0,
-              );
+                // retorna ao ciclo inicial
+                initCicle('pomodoro');
+              }
             }
+          } else {
+            setSeconds(seconds - 1);
           }
-        } else {
-          setSeconds(seconds - 1);
         }
-      }
-      clearInterval(interval);
-    }, 1000);
+        clearInterval(intervalTimer);
+      }, 1000),
+    );
+    clearInterval(intervalTimer);
   }, [isActive, isPaused, seconds, counterPomodoros]);
 
-  const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
-  const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
+  const timerMinutes = String(minutes).padStart(2, '0');
+  const timerSeconds = String(seconds).padStart(2, '0');
 
   function handleStart() {
     setIsActive(true);
@@ -109,13 +104,13 @@ const Timer = () => {
   }
 
   function handlePause() {
-    clearInterval(interval);
+    clearInterval(intervalTimer);
     setIsPaused(!isPaused);
     toggleColor('paused');
   }
 
   function handleResume() {
-    clearInterval(interval);
+    clearInterval(intervalTimer);
     setIsPaused(!isPaused);
     toggleColor('active');
   }
@@ -125,32 +120,25 @@ const Timer = () => {
     document.getElementById('circle').setAttribute('class', classe);
   }
 
-  function alertSound(counter) {
-    setCounterPomodoros(counter++);
+  function alertSound() {
+    incrementCounter();
     document.getElementById('audio').play();
     setTimeout(() => {
       alert('Ciclo concluído!');
     }, 100);
   }
 
-  function initCicle(
-    cicle,
-    textCicle,
-    classCicleActive,
-    color,
-    minutes,
-    seconds,
-  ) {
-    clearInterval(interval);
+  function initCicle(type) {
+    const { text, className, color, minutes, seconds } = CICLE_TYPES[type];
 
-    const elemento = document.getElementById('cicle');
+    const elemento = document.getElementById('cicle-text');
     if (elemento) {
-      elemento.innerText = textCicle;
+      elemento.innerText = text;
       elemento.style = `color: var(--${color})`;
     }
 
-    setCicle(cicle);
-    toggleColor(classCicleActive);
+    setCicle(type);
+    toggleColor(className);
     setIsActive(false);
     setIsPaused(true);
     setMinutes(minutes);
@@ -162,7 +150,7 @@ const Timer = () => {
     setTimeout(() => {
       const elemento = document.querySelector('.circle');
       if (elemento) {
-        initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0);
+        initCicle('pomodoro');
       }
     }, 3000);
   }
@@ -171,39 +159,19 @@ const Timer = () => {
     <section>
       <div className="container-controls">
         <button
-          onClick={() =>
-            initCicle('pomodoro', 'Pomodoro', 'pomodoro-active', 'red', 25, 0)
-          }
+          onClick={() => initCicle('pomodoro')}
           className="function pomodoro-button"
         >
           Pomodoro
         </button>
         <button
-          onClick={() =>
-            initCicle(
-              'short break',
-              'Short break',
-              'short-break-active',
-              'blue',
-              5,
-              0,
-            )
-          }
+          onClick={() => initCicle('shortBreak')}
           className="function short-break-button"
         >
           Short break
         </button>
         <button
-          onClick={() =>
-            initCicle(
-              'long break',
-              'Long break',
-              'long-break-active',
-              'purpure',
-              15,
-              0,
-            )
-          }
+          onClick={() => initCicle('longBreak')}
           className="function long-break-button"
         >
           Long break
@@ -239,11 +207,7 @@ const Timer = () => {
           )}
         </div>
 
-        <h2
-          id="cicle"
-          className="cicle"
-          style={{ color: 'var(--background-circle)' }}
-        >
+        <h2 id="cicle-text" style={{ color: 'var(--background-circle)' }}>
           Bem vindo ao pomos!
         </h2>
       </div>
