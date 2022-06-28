@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# pomos
+<br/>
+<div align="center">
+  <img alt="pomos" src=""/>
+</div>
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <a href="#bulb-ideia">Ideia</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#wrench-instalação">Instalação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#mortar_board-aprendizados">Aprendizados</a>&nbsp;&nbsp;&nbsp;
+</p>
 
-## Available Scripts
+### :bulb: Ideia
 
-In the project directory, you can run:
+Basicamente eu costumo utilizar o site: https://pomofocus.io/ durante os estudos para aplicar a técnica do pomodoro então me deparei com a seguinte situação: "Estou fazendo dois cursos de react em paralelo no momento e sinto que preciso de experiência prática em um projeto..." daí me veio na cabeça justamente a sacada de: "porque eu não faço o meu próprio podomoro utilizando justamente as técnologias que estou aprendendo junto a facilidade de já entender sobre o que e como quero, e :tada:, sugiu o pomos."
 
-### `npm start`
+O principal objetivo neste projeto foi a utilização de ReactJs no desenvolvimento de um projeto para adquiri experiência e que eu venha a utilizar durante meus estudos de modo a substituir o site que utilizava como meu pomodoro.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h4> Tecnologias utilizadas no projeto:</h4>
 
-### `npm test`
+<p align="center">
+    <img alt="HTML5" title="HTML5" src="https://github.com/gustavofbc/pixel_of_shields/blob/main/base/html.png" width="75"/>
+    <img alt="CSS3" title="CSS3" src="https://github.com/gustavofbc/pixel_of_shields/blob/main/base/css.png" width="75"/>
+    <img alt="JAVASCRIPT" title="JAVASCRIPT" src="https://github.com/gustavofbc/pixel_of_shields/blob/main/base/javascript.png" width="75"/>
+    <img alt="REACT" title="REACT" src="https://github.com/gustavofbc/pixel_of_shields/blob/main/base/react.png" width="75"/>
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<hr/>
 
-### `npm run build`
+<p>Projeto desenvolvido com o intuito de aplicar os conhecimentos obtidos por meio de estudos e cursos.</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img alt="Interface" src=""/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### :wrench: Instalação
 
-### `npm run eject`
+Instale o pomos com Yarn:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Na pasta de sua escolha clone o projeto via git com o comando:
+```
+git clone git@github.com:gustavofbc/desafio04.git
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+No diretório do projeto instale suas dependências executando o comando:
+```
+yarn install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Para executar o projeto abra a pasta em que este se encontra e execute o comando:
+```
+yarn start
+```
 
-## Learn More
+### :mortar_board: Aprendizados
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-> Implementação na prática de conceitos de React e demais (estados, hooks, imutabilidade);
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-> Implementação na prática de Hooks (useState, useEffect);
 
-### Code Splitting
+-> Devo destacar a leitura de código de outros respositórios com o intuito de repensar maneiras de desenvolver esta solução e o uso diário do serviço: https://pomofocus.io/ ;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-> Refatoração de código (destaco os comentários e as melhorias da estrutura propostas pelo [José Vinícius](https://github.com/saraivavini).
 
-### Analyzing the Bundle Size
+### Autor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [Gustavo Felipe](https://github.com/gustavofbc)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
