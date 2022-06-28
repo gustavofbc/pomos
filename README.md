@@ -1,7 +1,7 @@
 # pomos
 <br/>
 <div align="center">
-  <img alt="pomos" src=""/>
+  <img alt="pomos" src="https://github.com/gustavofbc/pomos/blob/main/src/assets/logo.svg"/>
 </div>
 <br/>
 
@@ -13,9 +13,9 @@
 
 ### :bulb: Ideia
 
-Basicamente eu costumo utilizar o site: https://pomofocus.io/ durante os estudos para aplicar a técnica do pomodoro então me deparei com a seguinte situação: "Estou fazendo dois cursos de react em paralelo no momento e sinto que preciso de experiência prática em um projeto..." daí me veio na cabeça justamente a sacada de: "porque eu não faço o meu próprio podomoro utilizando justamente as técnologias que estou aprendendo junto a facilidade de já entender sobre o que e como quero, e :tada:, sugiu o pomos."
+Basicamente eu costumo utilizar o site: https://pomofocus.io/ durante os estudos para aplicar a técnica do pomodoro então me deparei com a seguinte situação: "Estou fazendo dois cursos de react em paralelo no momento e sinto que preciso de experiência prática em um projeto..." daí me veio na cabeça justamente a sacada de: "porque eu não faço o meu próprio pomodoro utilizando justamente as tecnologias que estou aprendendo junto a facilidade de já entender sobre o que e como quero, e :tada:, surgiu o pomos."
 
-O principal objetivo neste projeto foi a utilização de ReactJs no desenvolvimento de um projeto para adquiri experiência e que eu venha a utilizar durante meus estudos de modo a substituir o site que utilizava como meu pomodoro.
+O principal objetivo neste projeto foi a utilização de ReactJs no desenvolvimento de um projeto para adquirir experiência e que eu venha a utilizar durante meus estudos de modo a substituir o site que utilizava como meu pomodoro.
 
 
 <h4> Tecnologias utilizadas no projeto:</h4>
@@ -31,7 +31,11 @@ O principal objetivo neste projeto foi a utilização de ReactJs no desenvolvime
 
 <p>Projeto desenvolvido com o intuito de aplicar os conhecimentos obtidos por meio de estudos e cursos.</p>
 
-<img alt="Interface" src=""/>
+<p align="center">
+  <img alt="Interface" src="https://github.com/gustavofbc/pomos/blob/main/src/assets/pomos-interface.png"/>
+  <img alt="Interface mobile" src="https://github.com/gustavofbc/pomos/blob/main/src/assets/pomos-interface-mobile.png"/>  
+</p>
+
 
 
 ### :wrench: Instalação
@@ -41,7 +45,7 @@ Instale o pomos com Yarn:
 
 Na pasta de sua escolha clone o projeto via git com o comando:
 ```
-git clone git@github.com:gustavofbc/desafio04.git
+git clone git@github.com:gustavofbc/pomos.git
 ```
 
 No diretório do projeto instale suas dependências executando o comando:
@@ -56,11 +60,11 @@ yarn start
 
 ### :mortar_board: Aprendizados
 
--> Implementação na prática de conceitos de React e demais (estados, hooks, imutabilidade);
+-> Implementação na prática de conceitos de ReactJs e de programação (estados, hooks, imutabilidade);
 
 -> Implementação na prática de Hooks (useState, useEffect);
 
--> Devo destacar a leitura de código de outros respositórios com o intuito de repensar maneiras de desenvolver esta solução e o uso diário do serviço: https://pomofocus.io/ ;
+-> Devo destacar a leitura de código de outros respositórios com o intuito de repensar maneiras de desenvolver esta solução e o uso diário do serviço: [pomofocus.io](https://pomofocus.io/);
 
 -> Refatoração de código (destaco os comentários e as melhorias da estrutura propostas pelo [José Vinícius](https://github.com/saraivavini).
 
