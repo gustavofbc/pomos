@@ -1,0 +1,145 @@
+.container-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  background: var(--black-dark);
+  opacity: 0.95;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-modal img {
+  cursor: pointer;
+  width: 3.2rem;
+  height: 3.2rem;
+  padding: 0.3rem;
+
+  border-radius: 8px;
+  border: 2px solid var(--background-circle);
+
+  transition: 0.5s;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.container-modal img:hover{
+  filter: brightness(0.7);
+}
+
+.modal-content {
+  width: 90%;
+  height: 90%;
+  max-width: 500px;
+  max-height: 500px;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 4px solid transparent;
+  background: 
+    linear-gradient(to right, var(--black-dark), var(--black-dark)), 
+    linear-gradient(to bottom, var(--green), var(--background-circle)); 
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.modal-content h2 {
+  color: var(--white);
+  line-height: 2.6rem;
+  letter-spacing: 0.1rem;
+  border-bottom: 3px solid var(--green);
+}
+
+.button {
+  width: 6rem;
+  height: 3rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid ;
+  background: var(--black-dark);
+
+  transition: 0.5s;
+}
+
+.button:hover {
+  filter: brightness(0.7);
+}
+
+.submit {
+  margin-top: 10px;
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.close {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+}
+
+.formulario p {
+  margin: 1rem;
+  color: var(--white);
+}
+
+.formulario label {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: var(--white);
+}
+
+
+label:before {
+  content: "";
+  display: inline;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+
+.pomodoro-timer::before {
+  background: var(--red);
+}
+
+.short-break-timer::before {
+  background: var(--blue);
+}
+
+.long-break-timer::before {
+  background: var(--purple);
+}
+
+@media screen and (max-width: 450px) {
+  .formulario label {
+    max-width: 300px;
+  }
+  .formulario input{
+    width: 100px;
+  }
+}

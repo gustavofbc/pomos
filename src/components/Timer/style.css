@@ -62,7 +62,7 @@ section {
     background-clip: padding-box, border-box;
     background-origin: padding-box, border-box;
     
-  animation: opacity 5s;
+  /* animation: text-transition 5s; */
 }
 
 .active {
@@ -95,6 +95,24 @@ section {
   }
 }
 
+@keyframes text-transition {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .timer {
   color: var(--gray);
   font-size: 4rem;
@@ -118,7 +136,10 @@ section {
   border-radius: 50%;
   color: var(--green);
   background-color: var(--gray);
+}
 
+.disabled{
+  opacity: 0;
 }
 
 button:hover {
@@ -128,6 +149,8 @@ button:hover {
 
 #cicle-text {
   padding: 1rem 0;
+  letter-spacing: 0.1rem;
+  animation: text-transition 2s;
 }
 
 @media screen and (max-width: 450px) {
@@ -146,5 +169,10 @@ button:hover {
     margin: 0.5rem;
     background-color: var(--background-circle);
     border-radius: 0.4rem;
+  }
+
+  #cicle-text {
+    text-align: center;
+    max-width: 300px;
   }
 }
