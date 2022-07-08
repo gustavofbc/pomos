@@ -139,7 +139,7 @@ section {
 }
 
 .disabled{
-  opacity: 0;
+  display: none;
 }
 
 button:hover {
