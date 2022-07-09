@@ -30,14 +30,20 @@ const ModalConfig = ({
   function save(event) {
     event.preventDefault();
     try {
-      set([pomodoroTimer, shortBreakTimer, longBreakTimer]);
-      if (cicle != 'apresentation') {
-        const result = initCicle(cicle);
-        if (result === true) {
-          alert('Dados atualizados com sucesso!');
+      if (pomodoroTimer <= 0 || shortBreakTimer <= 0 || longBreakTimer <= 0) {
+        return alert(
+          'Dados inválidos, favor verifique os dados e tente novamente.',
+        );
+      } else {
+        set([pomodoroTimer, shortBreakTimer, longBreakTimer]);
+        if (cicle != 'apresentation') {
+          const result = initCicle(cicle);
+          if (result === true) {
+            alert('Dados atualizados com sucesso!');
+          }
         }
+        closeModal();
       }
-      closeModal();
     } catch (error) {
       alert(error.message);
     }
