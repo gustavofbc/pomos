@@ -33,6 +33,7 @@ O principal objetivo neste projeto foi a utilização de ReactJs no desenvolvime
 
 <p align="center">
   <img alt="Interface" src="https://github.com/gustavofbc/pomos/blob/main/src/assets/pomos-interface.png"/>
+  <img alt="Interface configuration" src="https://github.com/gustavofbc/pomos/blob/main/src/assets/pomos-config.png"/>  
   <img alt="Interface mobile" src="https://github.com/gustavofbc/pomos/blob/main/src/assets/pomos-interface-mobile.png"/>  
 </p>
 
@@ -66,7 +67,11 @@ yarn start
 
 -> Devo destacar a leitura de código de outros respositórios com o intuito de repensar maneiras de desenvolver esta solução e o uso diário do serviço: [pomofocus.io](https://pomofocus.io/);
 
--> Refatoração de código (destaco os comentários e as melhorias da estrutura propostas pelo [José Vinícius](https://github.com/saraivavini).
+-> Refatoração de código (destaco os comentários e as melhorias da estrutura propostas pelo [José Vinícius](https://github.com/saraivavini);
+
+-> Permitir a configuração dos timers de cada ciclo pelo usuário;
+
+-> Utilização da API local storage para salvar a configuração dos timers.
 
 ### Autor
 
