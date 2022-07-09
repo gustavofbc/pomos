@@ -31,9 +31,11 @@ const ModalConfig = ({
     event.preventDefault();
     try {
       set([pomodoroTimer, shortBreakTimer, longBreakTimer]);
-      alert('Dados atualizados com sucesso!');
       if (cicle != 'apresentation') {
-        initCicle(cicle);
+        const result = initCicle(cicle);
+        if (result === true) {
+          alert('Dados atualizados com sucesso!');
+        }
       }
       closeModal();
     } catch (error) {
@@ -51,7 +53,7 @@ const ModalConfig = ({
         overlayClassName="modal-overlay"
         className="modal-content"
       >
-        <form className="formulario" onSubmit={save}>
+        <form className="formulario">
           <h2>Configurações</h2>
           <p>
             Personalise os valores abaixo <strong>em minutos</strong>.
@@ -65,6 +67,7 @@ const ModalConfig = ({
               min={1}
               value={pomodoroTimer}
               onChange={(event) => setPomodoroTimer(event.target.value)}
+              required
             />
           </label>
 
@@ -77,6 +80,7 @@ const ModalConfig = ({
               min={1}
               value={shortBreakTimer}
               onChange={(event) => setShortBreakTimer(event.target.value)}
+              required
             />
           </label>
 
@@ -89,10 +93,11 @@ const ModalConfig = ({
               placeholder="Ex: 15"
               value={longBreakTimer}
               onChange={(event) => setLongBreakTimer(event.target.value)}
+              required
             />
           </label>
 
-          <button type="submit" className="button submit">
+          <button type="submit" className="button submit" onClick={save}>
             Salvar
           </button>
         </form>

@@ -195,8 +195,10 @@ const Timer = () => {
         setMinutes(minutes);
         setSeconds(seconds);
         setCounterPomodoros(0);
+
+        return true;
       } else {
-        return '';
+        return false;
       }
     }
     const { text, className, color, minutes, seconds } = CICLE_TYPES[type];
@@ -214,21 +216,26 @@ const Timer = () => {
     setMinutes(minutes);
     setSeconds(seconds);
     setCounterPomodoros(0);
+    return true;
   }
 
   return (
     <section>
-      <ModalConfig
-        pomodoroTimer={pomodoroTimer}
-        shortBreakTimer={shortBreakTimer}
-        longBreakTimer={longBreakTimer}
-        setPomodoroTimer={setPomodoroTimer}
-        setShortBreakTimer={setShortBreakTimer}
-        setLongBreakTimer={setLongBreakTimer}
-        set={Storage.set}
-        initCicle={initCicle}
-        cicle={cicle}
-      />
+      {isPaused === true ? (
+        <ModalConfig
+          pomodoroTimer={pomodoroTimer}
+          shortBreakTimer={shortBreakTimer}
+          longBreakTimer={longBreakTimer}
+          setPomodoroTimer={setPomodoroTimer}
+          setShortBreakTimer={setShortBreakTimer}
+          setLongBreakTimer={setLongBreakTimer}
+          set={Storage.set}
+          initCicle={initCicle}
+          cicle={cicle}
+        />
+      ) : (
+        ''
+      )}
 
       <div className="container-controls">
         <button
