@@ -174,6 +174,31 @@ const Timer = () => {
   }
 
   function initCicle(type) {
+    if (isActive === true) {
+      if (
+        window.confirm(
+          'Alterar o ciclo fará com que o contador seja reinciado, deseja continuar?',
+        ) === true
+      ) {
+        const { text, className, color, minutes, seconds } = CICLE_TYPES[type];
+        document.querySelector('.button-action').classList.remove('disabled');
+        const elemento = document.getElementById('cicle-text');
+        if (elemento) {
+          elemento.innerText = text;
+          elemento.style = `color: var(--${color})`;
+        }
+
+        setCicle(type);
+        toggleColor(className);
+        setIsActive(false);
+        setIsPaused(true);
+        setMinutes(minutes);
+        setSeconds(seconds);
+        setCounterPomodoros(0);
+      } else {
+        return '';
+      }
+    }
     const { text, className, color, minutes, seconds } = CICLE_TYPES[type];
     document.querySelector('.button-action').classList.remove('disabled');
     const elemento = document.getElementById('cicle-text');
