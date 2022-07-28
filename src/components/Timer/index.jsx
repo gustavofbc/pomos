@@ -61,6 +61,7 @@ const Timer = () => {
   const [counterPomodoros, setCounterPomodoros] = useState(0);
   const [cicle, setCicle] = useState('apresentation');
   const [intervalTimer, setIntervalTimer] = useState(0);
+  // const [manualChange, setManualChange] = useState(false);
 
   const CICLE_TYPES = {
     pomodoro: {
@@ -92,9 +93,9 @@ const Timer = () => {
 
   function verifyCicle(cicle) {
     if (cicle === 'pomodoro') {
-      initCicle('shortBreak');
+      initCicle('shortBreak', false);
     } else {
-      initCicle('pomodoro');
+      initCicle('pomodoro', false);
     }
   }
 
@@ -112,7 +113,7 @@ const Timer = () => {
             } else {
               //após completar os 3 pomodoros completos
               if (counterPomodoros === 6) {
-                initCicle('longBreak');
+                initCicle('longBreak', false);
                 // alerta a conclusão de um pomodoro
                 alertSound();
                 setCounterPomodoros(-1);
@@ -126,7 +127,7 @@ const Timer = () => {
                 alertSound();
 
                 // retorna ao ciclo inicial
-                initCicle('pomodoro');
+                initCicle('pomodoro', false);
               }
             }
           } else {
@@ -173,13 +174,38 @@ const Timer = () => {
     }, 100);
   }
 
-  function initCicle(type) {
+  function initCicle(type, manualChange) {
     if (isActive === true) {
-      if (
-        window.confirm(
-          'Alterar o ciclo fará com que o contador seja reinciado, deseja continuar?',
-        ) === true
-      ) {
+      if (manualChange === true) {
+
+        if (
+          window.confirm(
+            'Alterar o ciclo fará com que o contador seja reinciado, deseja continuar?',
+          ) === true
+        ) {
+
+          const { text, className, color, minutes, seconds } = CICLE_TYPES[type];
+          document.querySelector('.button-action').classList.remove('disabled');
+          const elemento = document.getElementById('cicle-text');
+          if (elemento) {
+            elemento.innerText = text;
+            elemento.style = `color: var(--${color})`;
+          }
+
+          setCicle(type);
+          toggleColor(className);
+          setIsActive(false);
+          setIsPaused(true);
+          setMinutes(minutes);
+          setSeconds(seconds);
+          setCounterPomodoros(0);
+
+          return true;
+        } else {
+          return false;
+        }
+
+      } else {
         const { text, className, color, minutes, seconds } = CICLE_TYPES[type];
         document.querySelector('.button-action').classList.remove('disabled');
         const elemento = document.getElementById('cicle-text');
@@ -197,8 +223,6 @@ const Timer = () => {
         setCounterPomodoros(0);
 
         return true;
-      } else {
-        return false;
       }
     }
     const { text, className, color, minutes, seconds } = CICLE_TYPES[type];
@@ -239,19 +263,19 @@ const Timer = () => {
 
       <div className="container-controls">
         <button
-          onClick={() => initCicle('pomodoro')}
+          onClick={() => initCicle('pomodoro', true)}
           className="function pomodoro-button"
         >
           Pomodoro
         </button>
         <button
-          onClick={() => initCicle('shortBreak')}
+          onClick={() => initCicle('shortBreak', true)}
           className="function short-break-button"
         >
           Short break
         </button>
         <button
-          onClick={() => initCicle('longBreak')}
+          onClick={() => initCicle('longBreak', true)}
           className="function long-break-button"
         >
           Long break
